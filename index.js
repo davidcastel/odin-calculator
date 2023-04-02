@@ -6,3 +6,6 @@ const SUBTRACT = (a, b) => a - b;
 
 // Multiply Method
 const MULTIPLE = (a, b) => a * b;
+
+// DIVIDE method
+const DIVIDE = (a, b) => a / b;
