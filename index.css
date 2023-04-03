@@ -38,9 +38,12 @@ html {
     justify-content: center;
 }
 
+.calculator-container {
+    width: 60%;
+}
+
 /* Screen */
 #screen {
-    width: 60%;
     height: 100px;
     padding-top: 0.5rem;
     padding-bottom: 0.5rem;
