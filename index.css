@@ -1,3 +1,43 @@
+/* Boiler Plate */
+* {
+    box-sizing: border-box;
+    border: none;
+}
+
+*,
+*::before,
+*::after {
+    box-sizing: border-box;
+}
+
+img {
+    display: block;
+    max-width: 100%;
+}
+
+html {
+    -webkit-text-size-adjust: none; /* for iOS Safari */
+    text-size-adjust: none; /* for other mobile browsers */
+}
+
+@media (prefers-reduced-motion: no-preference) {
+    html {
+        scroll-behavior: smooth;
+    }
+}
+
+:focus:not(:focus-visible) {
+    outline: none;
+}
+
+.container {
+    position: relative;
+    width: 80%;
+    margin: auto;
+    display: flex;
+    justify-content: center;
+}
+
 /* Screen */
 #screen {
     width: 60%;
