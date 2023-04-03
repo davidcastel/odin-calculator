@@ -1,0 +1,39 @@
+/* Screen */
+#screen {
+    width: 60%;
+    height: 100px;
+    padding-top: 0.5rem;
+    padding-bottom: 0.5rem;
+
+    border-color: black;
+    border-radius: 25px;
+    border-style: solid;
+    border-width: 2px;
+
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+}
+
+#equation,
+#individualNumber {
+    display: flex;
+    align-items: center;
+    flex-direction: row-reverse;
+    width: -webkit-fill-available;
+    padding-right: 2.5%;
+}
+
+#equation {
+    height: 30%;
+
+    color: rgb(104, 104, 104);
+    font-size: 2rem;
+}
+
+#individualNumber {
+    height: 70%;
+    
+    color: black;
+    font-size: 4rem;
+}
