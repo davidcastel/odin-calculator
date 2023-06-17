@@ -2,6 +2,7 @@
 * {
     box-sizing: border-box;
     border: none;
+    font-family: 'Courier New', Courier, monospace;
 }
 
 *,
@@ -43,7 +44,7 @@ html {
 }
 
 /* Screen */
-#screen {
+.screen {
     height: 100px;
     padding-top: 0.5rem;
     padding-bottom: 0.5rem;
@@ -58,8 +59,8 @@ html {
     flex-direction: column;
 }
 
-#equation,
-#individualNumber {
+.equation,
+.individualNumber {
     display: flex;
     align-items: center;
     flex-direction: row-reverse;
@@ -67,16 +68,65 @@ html {
     padding-right: 2.5%;
 }
 
-#equation {
+.equation {
     height: 30%;
 
     color: rgb(104, 104, 104);
     font-size: 2rem;
 }
 
-#individualNumber {
+.individualNumber {
     height: 70%;
     
     color: black;
     font-size: 4rem;
+}
+
+/* TODO */
+/* * [] Style Grid
+   * [] Hide caption and header
+*/
+
+/* Grid Layout */
+.buttons {
+    display: flex;
+}
+
+table {
+    width: 100%;
+    border-collapse: separate;
+    border-spacing: 20px 10px;
+}
+
+tr {
+    height: inherit;
+}
+
+td {
+    border-style: none;
+    text-align: center;
+    height: inherit;
+    height: 1px;
+}
+
+.btn {
+    width: 100%;
+    height: 100%;
+    padding: 1rem;
+    
+    display: block;
+    border-radius: 8px;
+
+    background-color: blue;
+    color: whitesmoke;
+    font-size: 1.5rem;
+}
+
+@media (max-width: 768px) {
+    .container {
+        width: 90%;
+    }
+    .calculator-container {
+        width: 100%;
+    }
 }
