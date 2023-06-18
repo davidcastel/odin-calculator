@@ -77,7 +77,7 @@ const inputController = (value) => {
             VARS.equation = [];
             break;
         case "=":
-            if (VARS.first.isSet) {
+            if (VARS.first.isSet && VARS.current.stringForm !== "") {
                 let currentValue = parseFloat(VARS.current.stringForm);
                 VARS.equation.push(currentValue);
                 currentValue = OPERATE(VARS.first.value, currentValue, VARS.operatation);
@@ -112,6 +112,8 @@ const inputController = (value) => {
             _setNegativeValue(EMPTY_STRING);
             break;
         default:
+            if ( VARS.current.stringForm === "" ) break;
+
             let currentValue = parseFloat(VARS.current.stringForm);
             VARS.equation.push(currentValue);
 
