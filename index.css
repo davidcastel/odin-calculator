@@ -59,8 +59,8 @@ html {
     flex-direction: column;
 }
 
-.equation,
-.individualNumber {
+#equation,
+#individualNumber {
     display: flex;
     align-items: center;
     flex-direction: row-reverse;
@@ -68,14 +68,14 @@ html {
     padding-right: 2.5%;
 }
 
-.equation {
+#equation {
     height: 30%;
 
     color: rgb(104, 104, 104);
     font-size: 2rem;
 }
 
-.individualNumber {
+#individualNumber {
     height: 70%;
     
     color: black;
