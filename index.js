@@ -46,10 +46,15 @@ const inputPressed = () => {
     
     INPUTS.forEach(input => {
         input.addEventListener('click', () => {
-            console.log(input.value);
+            displayIndividualNumber(input.value);
         });
     });
 };
+
+const displayIndividualNumber = (value) => {
+    const INDIVIDUALNUMBER = document.getElementById('individualNumber');
+    INDIVIDUALNUMBER.textContent += value;
+}
 
 const main = () => {
     inputPressed();
