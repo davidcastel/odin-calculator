@@ -31,3 +31,19 @@ const OPERATE = (num1, num2, oper) => {
             break;
     }
 };
+
+const inputPressed = () => {
+    let INPUTS = document.querySelectorAll('input');
+    
+    INPUTS.forEach(input => {
+        input.addEventListener('click', () => {
+            console.log(input);
+        });
+    });
+};
+
+const main = () => {
+    inputPressed();
+};
+
+main();
