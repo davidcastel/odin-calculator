@@ -14,16 +14,18 @@ const DIVIDE = (a, b) => a / b;
 const VARS = {
     first: {
         value: 0,
-        isWholeNumber: true
+        isWholeNumber: true,
+        isNegative: false,
+        isSet: false
     },
-    second: {
+    current: {
+        stringForm: "",
         value: 0,
-        isWholeNumber: true
+        isWholeNumber: true,
+        isNegative: false
     },
     operatation: "",
-    display: "",
     equation: [],
-    total: 0
 };
 
 const OPERATE = (num1, num2, oper) => {
