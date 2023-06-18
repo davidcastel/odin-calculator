@@ -12,9 +12,18 @@ const DIVIDE = (a, b) => a / b;
 
 // Global Variables
 const VARS = {
-    first: 0,
+    first: {
+        value: 0,
+        isWholeNumber: true
+    },
+    second: {
+        value: 0,
+        isWholeNumber: true
+    },
     operatation: "",
-    second: 0
+    display: "",
+    equation: [],
+    total: 0
 };
 
 const OPERATE = (num1, num2, oper) => {
