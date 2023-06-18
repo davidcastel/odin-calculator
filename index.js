@@ -48,7 +48,7 @@ const inputPressed = () => {
     
     INPUTS.forEach(input => {
         input.addEventListener('click', () => {
-            displayIndividualNumber(input.value);
+            inputController(input.value);
         });
     });
 };
