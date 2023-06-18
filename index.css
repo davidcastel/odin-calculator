@@ -82,11 +82,6 @@ html {
     font-size: 4rem;
 }
 
-/* TODO */
-/* * [] Style Grid
-   * [] Hide caption and header
-*/
-
 /* Grid Layout */
 .buttons {
     display: flex;
