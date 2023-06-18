@@ -46,7 +46,7 @@ const inputPressed = () => {
     
     INPUTS.forEach(input => {
         input.addEventListener('click', () => {
-            console.log(input);
+            console.log(input.value);
         });
     });
 };
