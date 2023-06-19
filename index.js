@@ -116,18 +116,13 @@ const inputController = (value) => {
                 VARS.first.isSet = false;
             }
 
-            VARS.first.value = parseFloat(VARS.current.stringForm);
-            VARS.first.isWholeNumber = VARS.current.isWholeNumber;
-            VARS.first.isNegative = VARS.current.isNegative;
-            VARS.first.isSet = true;
-
+            _setFirstNumberObjectValues();
             _clearCurrentValue();
 
             VARS.operatation = value;
             VARS.equation.push(value);
 
             displayIndividualNumber(value, ADD);
-
             _clearCurrentValue();
             break;
     }
@@ -179,6 +174,13 @@ const _setCurrentObjectValues = (currentValue) => {
     VARS.current.value = currentValue;
     VARS.current.stringForm = "" + currentValue;
 };
+
+const _setFirstNumberObjectValues = () => {
+    VARS.first.value = parseFloat(VARS.current.stringForm);
+    VARS.first.isWholeNumber = VARS.current.isWholeNumber;
+    VARS.first.isNegative = VARS.current.isNegative;
+    VARS.first.isSet = true;
+}
 
 const _clearCurrentValue = () => {
     VARS.current.stringForm = "";
