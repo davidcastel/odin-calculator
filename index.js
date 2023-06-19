@@ -82,13 +82,7 @@ const inputController = (value) => {
 
                 VARS.first.isSet = false;
 
-                let displayEquation = VARS.equation.join(' ');
-
-                let equationSpan = document.getElementById('equation');
-                let individualNumber = document.getElementById('individualNumber');
-                equationSpan.textContent = displayEquation;
-                individualNumber.textContent = currentValue;
-
+                _displayFinalValueAndEquation(currentValue);
                 _clearEquationAndOperation();
             }
             break;
@@ -139,6 +133,14 @@ const displayIndividualNumber = (value, action) => {
         VARS.current.stringForm = value;
         individualNumber.textContent = value;
     }
+};
+
+const _displayFinalValueAndEquation = (currentValue) => {
+    let displayEquation = VARS.equation.join(' ');
+    let equationSpan = document.getElementById('equation');
+    let individualNumber = document.getElementById('individualNumber');
+    equationSpan.textContent = displayEquation;
+    individualNumber.textContent = currentValue;
 };
 
 const _isInputADigit = (value) => value.match(/^\d+$/) ? true : false;
