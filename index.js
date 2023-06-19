@@ -68,9 +68,7 @@ const inputController = (value) => {
         case "clear":
             displayIndividualNumber(EMPTY_STRING, CLEAR);
             _clearCurrentValue();
-
-            VARS.operatation = "";
-            VARS.equation = [];
+            _clearEquationAndOperation();
             break;
         case "=":
             if (VARS.first.isSet && VARS.current.stringForm !== "") {
@@ -94,8 +92,7 @@ const inputController = (value) => {
                 equationSpan.textContent = displayEquation;
                 individualNumber.textContent = currentValue;
 
-                VARS.operatation = "";
-                VARS.equation = [];
+                _clearEquationAndOperation();
             }
             break;
         case ".":
@@ -187,6 +184,11 @@ const _clearCurrentValue = () => {
     VARS.current.value = 0;
     VARS.current.isWholeNumber = true;
     VARS.current.isNegative = false;
+};
+
+const _clearEquationAndOperation = () => {
+    VARS.operatation = "";
+    VARS.equation = [];
 };
 
 const main = () => {
