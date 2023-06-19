@@ -78,10 +78,7 @@ const inputController = (value) => {
 
                 VARS.equation.push(value, currentValue);
 
-                VARS.current.isNegative = currentValue < 0 ? true : false;
-                VARS.current.isWholeNumber = Number.isInteger(currentValue);
-                VARS.current.value = currentValue;
-                VARS.current.stringForm = "" + currentValue;
+                _setCurrentObjectValues(currentValue);
 
                 VARS.first.isSet = false;
 
@@ -114,10 +111,7 @@ const inputController = (value) => {
                 currentValue = parseFloat(VARS.current.stringForm);
                 currentValue = OPERATE(VARS.first.value, currentValue, VARS.operatation);
 
-                VARS.current.isNegative = currentValue < 0 ? true : false;
-                VARS.current.isWholeNumber = Number.isInteger(currentValue);
-                VARS.current.value = currentValue;
-                VARS.current.stringForm = "" + currentValue;
+                _setCurrentObjectValues(currentValue);
 
                 VARS.first.isSet = false;
             }
@@ -177,6 +171,13 @@ const _setNegativeValue = (EMPTY_STRING) => {
         VARS.current.stringForm = stringForm;
         individualNumber.textContent = stringForm;
     }
+};
+
+const _setCurrentObjectValues = (currentValue) => {
+    VARS.current.isNegative = currentValue < 0 ? true : false;
+    VARS.current.isWholeNumber = Number.isInteger(currentValue);
+    VARS.current.value = currentValue;
+    VARS.current.stringForm = "" + currentValue;
 };
 
 const _clearCurrentValue = () => {
