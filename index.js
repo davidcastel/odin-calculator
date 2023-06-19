@@ -67,11 +67,7 @@ const inputController = (value) => {
     switch(value) {
         case "clear":
             displayIndividualNumber(EMPTY_STRING, CLEAR);
-
-            VARS.current.stringForm = "";
-            VARS.current.value = 0;
-            VARS.current.isWholeNumber = true;
-            VARS.current.isNegative = false;
+            _clearCurrentValue();
 
             VARS.operatation = "";
             VARS.equation = [];
@@ -134,20 +130,14 @@ const inputController = (value) => {
             VARS.first.isNegative = VARS.current.isNegative;
             VARS.first.isSet = true;
 
-            VARS.current.stringForm = "";
-            VARS.current.value = 0;
-            VARS.current.isWholeNumber = true;
-            VARS.current.isNegative = false;
+            _clearCurrentValue();
 
             VARS.operatation = value;
             VARS.equation.push(value);
 
             displayIndividualNumber(value, ADD);
 
-            VARS.current.stringForm = "";
-            VARS.current.value = 0;
-            VARS.current.isWholeNumber = true;
-            VARS.current.isNegative = false;
+            _clearCurrentValue();
             break;
     }
 };
@@ -190,6 +180,13 @@ const _setNegativeValue = (EMPTY_STRING) => {
         VARS.current.stringForm = stringForm;
         individualNumber.textContent = stringForm;
     }
+};
+
+const _clearCurrentValue = () => {
+    VARS.current.stringForm = "";
+    VARS.current.value = 0;
+    VARS.current.isWholeNumber = true;
+    VARS.current.isNegative = false;
 };
 
 const main = () => {
