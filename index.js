@@ -74,6 +74,15 @@ const inputController = (value) => {
             if (VARS.first.isSet && VARS.current.stringForm !== EMPTY_STRING) {
                 let currentValue = parseFloat(VARS.current.stringForm);
                 VARS.equation.push(currentValue);
+
+                if ( (currentValue === 0 || currentValue === 0.0) && VARS.operatation === "/" ) {
+                    VARS.equation.push(value);
+                    VARS.first.isSet = false;
+                    _displayFinalValueAndEquation("Error! Cannot divide by 0");
+                    _clearCurrentValue();
+                    _clearEquationAndOperation();
+                    break;
+                }
                 currentValue = OPERATE(VARS.first.value, currentValue, VARS.operatation);
 
                 VARS.equation.push(value, currentValue);
@@ -103,6 +112,13 @@ const inputController = (value) => {
 
             if (VARS.first.isSet) {
                 currentValue = parseFloat(VARS.current.stringForm);
+                if ( (currentValue === 0 || currentValue === 0.0) && VARS.operatation === "/" ) {
+                    VARS.first.isSet = false;
+                    _displayFinalValueAndEquation("Error! Cannot divide by 0");
+                    _clearCurrentValue();
+                    _clearEquationAndOperation();
+                    break;
+                }
                 currentValue = OPERATE(VARS.first.value, currentValue, VARS.operatation);
 
                 _setCurrentObjectValues(currentValue);
