@@ -1,7 +1,7 @@
 # The Odin Project Submission: Calculator
 
 ## TODO: Things still needed to implement
-[ ] How to handle when the user tries to divide by 0
+[x] How to handle when the user tries to divide by 0
 
 [ ] How to implement keybinding
 
