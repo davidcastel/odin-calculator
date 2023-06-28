@@ -75,12 +75,9 @@ const inputController = (value) => {
                 let currentValue = parseFloat(VARS.current.stringForm);
                 VARS.equation.push(currentValue);
 
-                if ( (currentValue === 0 || currentValue === 0.0) && VARS.operatation === "/" ) {
+                if (_areWeDividingByZero(currentValue)) {
                     VARS.equation.push(value);
-                    VARS.first.isSet = false;
-                    _displayFinalValueAndEquation("Error! Cannot divide by 0");
-                    _clearCurrentValue();
-                    _clearEquationAndOperation();
+                    _handleDividingByZero();
                     break;
                 }
                 currentValue = OPERATE(VARS.first.value, currentValue, VARS.operatation);
@@ -112,11 +109,8 @@ const inputController = (value) => {
 
             if (VARS.first.isSet) {
                 currentValue = parseFloat(VARS.current.stringForm);
-                if ( (currentValue === 0 || currentValue === 0.0) && VARS.operatation === "/" ) {
-                    VARS.first.isSet = false;
-                    _displayFinalValueAndEquation("Error! Cannot divide by 0");
-                    _clearCurrentValue();
-                    _clearEquationAndOperation();
+                if (_areWeDividingByZero(currentValue)) {
+                    _handleDividingByZero();
                     break;
                 }
                 currentValue = OPERATE(VARS.first.value, currentValue, VARS.operatation);
@@ -157,6 +151,13 @@ const _displayFinalValueAndEquation = (currentValue) => {
     let individualNumber = document.getElementById('individualNumber');
     equationSpan.textContent = displayEquation;
     individualNumber.textContent = currentValue;
+};
+
+const _handleDividingByZero = () => {
+    VARS.first.isSet = false;
+    _displayFinalValueAndEquation("Error! Cannot divide by 0");
+    _clearCurrentValue();
+    _clearEquationAndOperation();
 };
 
 const _isInputADigit = (value) => value.match(/^\d+$/) ? true : false;
@@ -211,6 +212,8 @@ const _clearEquationAndOperation = () => {
     VARS.operatation = "";
     VARS.equation = [];
 };
+
+const _areWeDividingByZero = (val) => (val === 0 || val === 0.0) && VARS.operatation === "/";
 
 const main = () => {
     inputPressed();
