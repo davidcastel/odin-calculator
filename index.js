@@ -71,23 +71,20 @@ const inputController = (value) => {
             _clearEquationAndOperation();
             break;
         case "=":
-            if (_getFirstIsSet() && VARS.current.stringForm !== EMPTY_STRING) {
-                let currentValue = parseFloat(VARS.current.stringForm);
-                VARS.equation.push(currentValue);
+            if (_getFirstIsSet() && _getCurrentStringFormat() !== EMPTY_STRING) {
+                let currentValue = parseFloat(_getCurrentStringFormat());
+                _addToEquationArr(currentValue);
 
                 if (_areWeDividingByZero(currentValue)) {
-                    VARS.equation.push(value);
+                    _addToEquationArr(value);
                     _handleDividingByZero();
                     break;
                 }
+
                 currentValue = OPERATE(_getFirstValue(), currentValue, _getOperation());
-
-                VARS.equation.push(value, currentValue);
-
+                _addToEquationArr(value, currentValue);
                 _setCurrentObjectValues(currentValue);
-
                 _setFirstIsSet(false);
-
                 _displayFinalValueAndEquation(currentValue);
                 _clearEquationAndOperation();
             }
@@ -102,13 +99,13 @@ const inputController = (value) => {
             _setNegativeValue(EMPTY_STRING);
             break;
         default:
-            if ( VARS.current.stringForm === EMPTY_STRING ) break;
+            if ( _getCurrentStringFormat() === EMPTY_STRING ) break;
 
-            let currentValue = parseFloat(VARS.current.stringForm);
-            VARS.equation.push(currentValue);
+            let currentValue = parseFloat(_getCurrentStringFormat());
+            _addToEquationArr(currentValue);
 
             if (_getFirstIsSet()) {
-                currentValue = parseFloat(VARS.current.stringForm);
+                currentValue = parseFloat(_getCurrentStringFormat());
                 if (_areWeDividingByZero(currentValue)) {
                     _handleDividingByZero();
                     break;
@@ -124,7 +121,7 @@ const inputController = (value) => {
             _clearCurrentValue();
 
             _setOperation(value);
-            VARS.equation.push(value);
+            _addToEquationArr(value);
 
             displayIndividualNumber(value, ADD);
             _clearCurrentValue();
@@ -140,7 +137,7 @@ const displayIndividualNumber = (value, action) => {
         individualNumber.textContent += value;
     }
     else if (action === "clear") {
-        VARS.current.stringForm = value;
+        _setCurrentStringFormat(value);
         individualNumber.textContent = value;
     }
 };
@@ -172,10 +169,14 @@ const _setFirstValue = (val) => VARS.first.value = val;
 
 const _setOperation = (oper) => VARS.operatation = oper;
 
+const _setCurrentStringFormat = (str) => VARS.current.stringForm = str;
+
+const _addToEquationArr = (...val) => VARS.equation.push(val);
+
 const _setNegativeValue = (EMPTY_STRING) => {
     let individualNumber = document.getElementById('individualNumber');
     let isCurrentValueNegative = VARS.current.isNegative;
-    let stringForm = VARS.current.stringForm;
+    let stringForm = _getCurrentStringFormat();
     const NEGATIVE_SIGN = "-";
 
     isCurrentValueNegative = isCurrentValueNegative ? false : true;
@@ -183,14 +184,13 @@ const _setNegativeValue = (EMPTY_STRING) => {
 
     if (isCurrentValueNegative === true) {
         stringForm = NEGATIVE_SIGN.concat(stringForm);
-        VARS.current.stringForm = stringForm;
-        individualNumber.textContent = stringForm;
     }
     else {
         stringForm = stringForm.replace(NEGATIVE_SIGN, EMPTY_STRING);
-        VARS.current.stringForm = stringForm;
-        individualNumber.textContent = stringForm;
     }
+
+    _setCurrentStringFormat(stringForm);
+    individualNumber.textContent = stringForm;
 };
 
 const _setCurrentObjectValues = (currentValue) => {
@@ -201,7 +201,7 @@ const _setCurrentObjectValues = (currentValue) => {
 };
 
 const _setFirstNumberObjectValues = () => {
-    _setFirstValue(parseFloat(VARS.current.stringForm));
+    _setFirstValue(parseFloat(_getCurrentStringFormat()));
     VARS.first.isWholeNumber = VARS.current.isWholeNumber;
     VARS.first.isNegative = VARS.current.isNegative;
     _setFirstIsSet(true);
@@ -213,8 +213,10 @@ const _getFirstValue = () => VARS.first.value;
 
 const _getOperation = () => VARS.operatation;
 
+const _getCurrentStringFormat = () => VARS.current.stringForm;
+
 const _clearCurrentValue = () => {
-    VARS.current.stringForm = "";
+    _setCurrentStringFormat("");
     VARS.current.value = 0;
     VARS.current.isWholeNumber = true;
     VARS.current.isNegative = false;
