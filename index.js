@@ -71,7 +71,7 @@ const inputController = (value) => {
             _clearEquationAndOperation();
             break;
         case "=":
-            if (VARS.first.isSet && VARS.current.stringForm !== EMPTY_STRING) {
+            if (_getFirstIsSet() && VARS.current.stringForm !== EMPTY_STRING) {
                 let currentValue = parseFloat(VARS.current.stringForm);
                 VARS.equation.push(currentValue);
 
@@ -80,13 +80,13 @@ const inputController = (value) => {
                     _handleDividingByZero();
                     break;
                 }
-                currentValue = OPERATE(VARS.first.value, currentValue, VARS.operatation);
+                currentValue = OPERATE(_getFirstValue(), currentValue, _getOperation());
 
                 VARS.equation.push(value, currentValue);
 
                 _setCurrentObjectValues(currentValue);
 
-                VARS.first.isSet = false;
+                _setFirstIsSet(false);
 
                 _displayFinalValueAndEquation(currentValue);
                 _clearEquationAndOperation();
@@ -94,7 +94,7 @@ const inputController = (value) => {
             break;
         case ".":
             if (_isCurrentValueAWholeNumber()) {
-                _setWholeNumber(false)
+                _setCurrentIsWholeNumber(false)
                 displayIndividualNumber(DECIMAL_POINT, ADD);
             }
             break;
@@ -107,23 +107,23 @@ const inputController = (value) => {
             let currentValue = parseFloat(VARS.current.stringForm);
             VARS.equation.push(currentValue);
 
-            if (VARS.first.isSet) {
+            if (_getFirstIsSet()) {
                 currentValue = parseFloat(VARS.current.stringForm);
                 if (_areWeDividingByZero(currentValue)) {
                     _handleDividingByZero();
                     break;
                 }
-                currentValue = OPERATE(VARS.first.value, currentValue, VARS.operatation);
+                currentValue = OPERATE(_getFirstValue(), currentValue, _getOperation());
 
                 _setCurrentObjectValues(currentValue);
 
-                VARS.first.isSet = false;
+                _setFirstIsSet(false);
             }
 
             _setFirstNumberObjectValues();
             _clearCurrentValue();
 
-            VARS.operatation = value;
+            _setOperation(value);
             VARS.equation.push(value);
 
             displayIndividualNumber(value, ADD);
@@ -154,7 +154,7 @@ const _displayFinalValueAndEquation = (currentValue) => {
 };
 
 const _handleDividingByZero = () => {
-    VARS.first.isSet = false;
+    _setFirstIsSet(false);
     _displayFinalValueAndEquation("Error! Cannot divide by 0");
     _clearCurrentValue();
     _clearEquationAndOperation();
@@ -164,7 +164,13 @@ const _isInputADigit = (value) => value.match(/^\d+$/) ? true : false;
 
 const _isCurrentValueAWholeNumber = () => VARS.current.isWholeNumber === true;
 
-const _setWholeNumber = (bool) => VARS.current.isWholeNumber = bool;
+const _setCurrentIsWholeNumber = (bool) => VARS.current.isWholeNumber = bool;
+
+const _setFirstIsSet = (bool) => VARS.first.isSet = bool;
+
+const _setFirstValue = (val) => VARS.first.value = val;
+
+const _setOperation = (oper) => VARS.operatation = oper;
 
 const _setNegativeValue = (EMPTY_STRING) => {
     let individualNumber = document.getElementById('individualNumber');
@@ -195,11 +201,17 @@ const _setCurrentObjectValues = (currentValue) => {
 };
 
 const _setFirstNumberObjectValues = () => {
-    VARS.first.value = parseFloat(VARS.current.stringForm);
+    _setFirstValue(parseFloat(VARS.current.stringForm));
     VARS.first.isWholeNumber = VARS.current.isWholeNumber;
     VARS.first.isNegative = VARS.current.isNegative;
-    VARS.first.isSet = true;
+    _setFirstIsSet(true);
 }
+
+const _getFirstIsSet = () => VARS.first.isSet;
+
+const _getFirstValue = () => VARS.first.value;
+
+const _getOperation = () => VARS.operatation;
 
 const _clearCurrentValue = () => {
     VARS.current.stringForm = "";
@@ -209,11 +221,11 @@ const _clearCurrentValue = () => {
 };
 
 const _clearEquationAndOperation = () => {
-    VARS.operatation = "";
+    _setOperation("");
     VARS.equation = [];
 };
 
-const _areWeDividingByZero = (val) => (val === 0 || val === 0.0) && VARS.operatation === "/";
+const _areWeDividingByZero = (val) => (val === 0 || val === 0.0) && _getOperation() === "/";
 
 const main = () => {
     inputPressed();
