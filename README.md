@@ -7,7 +7,7 @@
 
 [ ] Handle the significant figures  when dealing with float values
 
-[ ] Refactor code to have more efficient way of completeing tasks
+[x] Refactor code to have more efficient way of completeing tasks
 
 ## Extra things that could be implemented
 [ ] Implement a backspace value

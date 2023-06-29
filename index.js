@@ -66,9 +66,7 @@ const inputController = (value) => {
 
     switch(value) {
         case "clear":
-            displayIndividualNumber(EMPTY_STRING, CLEAR);
-            _clearCurrentValue();
-            _clearEquationAndOperation();
+            clear(EMPTY_STRING, CLEAR);
             break;
         case "=":
             if (_getFirstIsSet() && _getCurrentStringFormat() !== EMPTY_STRING) {
@@ -91,42 +89,49 @@ const inputController = (value) => {
             }
             break;
         case ".":
-            if (_isCurrentValueAWholeNumber()) {
-                _setCurrentIsWholeNumber(false)
-                displayIndividualNumber(DECIMAL_POINT, ADD);
-            }
+            handleDecimal(DECIMAL_POINT, ADD);
             break;
         case "+/-":
             _setNegativeValue(EMPTY_STRING);
             break;
         default:
             if ( _getCurrentStringFormat() === EMPTY_STRING ) break;
-
             let currentValue = parseFloat(_getCurrentStringFormat());
             _addToEquationArr(currentValue);
 
             if (_getFirstIsSet()) {
                 currentValue = parseFloat(_getCurrentStringFormat());
+
                 if (_areWeDividingByZero(currentValue)) {
                     _handleDividingByZero();
                     break;
                 }
+
                 currentValue = OPERATE(_getFirstValue(), currentValue, _getOperation());
-
                 _setCurrentObjectValues(currentValue);
-
                 _setFirstIsSet(false);
             }
 
             _setFirstNumberObjectValues();
             _clearCurrentValue();
-
             _setOperation(value);
             _addToEquationArr(value);
-
             displayIndividualNumber(value, ADD);
             _clearCurrentValue();
             break;
+    }
+};
+
+const clear = (EMPTY_STRING, CLEAR) => {
+    displayIndividualNumber(EMPTY_STRING, CLEAR);
+    _clearCurrentValue();
+    _clearEquationAndOperation();
+};
+
+const handleDecimal = (DECIMAL_POINT, ADD) => {
+    if (_isCurrentValueAWholeNumber()) {
+        _setCurrentIsWholeNumber(false);
+        displayIndividualNumber(DECIMAL_POINT, ADD);
     }
 };
 
