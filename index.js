@@ -82,7 +82,8 @@ const inputController = (value) => {
                 }
 
                 currentValue = OPERATE(_getFirstValue(), currentValue, _getOperation());
-                _addToEquationArr(value, currentValue);
+                _addToEquationArr(value);
+                _addToEquationArr(currentValue);
                 _setCurrentObjectValues(currentValue);
                 _setFirstIsSet(false);
                 _displayFinalValueAndEquation(currentValue);
@@ -143,7 +144,7 @@ const displayIndividualNumber = (value, action) => {
 };
 
 const _displayFinalValueAndEquation = (currentValue) => {
-    let displayEquation = VARS.equation.join(' ');
+    let displayEquation = _getEquation().join(' ');
     let equationSpan = document.getElementById('equation');
     let individualNumber = document.getElementById('individualNumber');
     equationSpan.textContent = displayEquation;
@@ -159,28 +160,29 @@ const _handleDividingByZero = () => {
 
 const _isInputADigit = (value) => value.match(/^\d+$/) ? true : false;
 
-const _isCurrentValueAWholeNumber = () => VARS.current.isWholeNumber === true;
+const _isCurrentValueAWholeNumber = () => _getCurrentIsWholeNumber() === true;
 
 const _setCurrentIsWholeNumber = (bool) => VARS.current.isWholeNumber = bool;
-
 const _setFirstIsSet = (bool) => VARS.first.isSet = bool;
-
 const _setFirstValue = (val) => VARS.first.value = val;
-
 const _setOperation = (oper) => VARS.operatation = oper;
-
+const _setFirstIsWholeNumber = (bool) => VARS.first.isWholeNumber = bool;
+const _setFirstIsNegative = (bool) => VARS.first.isNegative = bool;
 const _setCurrentStringFormat = (str) => VARS.current.stringForm = str;
+const _setCurrentIsNegative = (bool) => VARS.current.isNegative = bool;
+const _setCurrentValue = (val) => VARS.current.value = val;
 
-const _addToEquationArr = (...val) => VARS.equation.push(val);
+const _addToEquationArr = (val) => VARS.equation.push(val);
+const _clearEquationArr = () => VARS.equation = [];
 
 const _setNegativeValue = (EMPTY_STRING) => {
     let individualNumber = document.getElementById('individualNumber');
-    let isCurrentValueNegative = VARS.current.isNegative;
+    let isCurrentValueNegative = _getCurrentIsNegative();
     let stringForm = _getCurrentStringFormat();
     const NEGATIVE_SIGN = "-";
 
     isCurrentValueNegative = isCurrentValueNegative ? false : true;
-    VARS.current.isNegative = isCurrentValueNegative;
+    _setCurrentIsNegative(isCurrentValueNegative)
 
     if (isCurrentValueNegative === true) {
         stringForm = NEGATIVE_SIGN.concat(stringForm);
@@ -194,37 +196,37 @@ const _setNegativeValue = (EMPTY_STRING) => {
 };
 
 const _setCurrentObjectValues = (currentValue) => {
-    VARS.current.isNegative = currentValue < 0 ? true : false;
-    VARS.current.isWholeNumber = Number.isInteger(currentValue);
-    VARS.current.value = currentValue;
-    VARS.current.stringForm = "" + currentValue;
+    _setCurrentIsNegative(currentValue < 0 ? true : false);
+    _setCurrentIsWholeNumber(Number.isInteger(currentValue));
+    _setCurrentValue(currentValue);
+    _setCurrentStringFormat("" + currentValue);
 };
 
 const _setFirstNumberObjectValues = () => {
     _setFirstValue(parseFloat(_getCurrentStringFormat()));
-    VARS.first.isWholeNumber = VARS.current.isWholeNumber;
-    VARS.first.isNegative = VARS.current.isNegative;
+    _setFirstIsWholeNumber(_getCurrentIsWholeNumber());
+    _setFirstIsNegative(_getCurrentIsNegative());
     _setFirstIsSet(true);
 }
 
 const _getFirstIsSet = () => VARS.first.isSet;
-
 const _getFirstValue = () => VARS.first.value;
-
 const _getOperation = () => VARS.operatation;
-
+const _getEquation = () => VARS.equation;
 const _getCurrentStringFormat = () => VARS.current.stringForm;
+const _getCurrentIsNegative = () => VARS.current.isNegative;
+const _getCurrentIsWholeNumber = () => VARS.current.isWholeNumber;
 
 const _clearCurrentValue = () => {
     _setCurrentStringFormat("");
-    VARS.current.value = 0;
-    VARS.current.isWholeNumber = true;
-    VARS.current.isNegative = false;
+    _setCurrentValue(0);
+    _setCurrentIsWholeNumber(true);
+    _setCurrentIsNegative(false);
 };
 
 const _clearEquationAndOperation = () => {
     _setOperation("");
-    VARS.equation = [];
+    _clearEquationArr();
 };
 
 const _areWeDividingByZero = (val) => (val === 0 || val === 0.0) && _getOperation() === "/";
