@@ -3,7 +3,7 @@
 ## TODO: Things still needed to implement
 [x] How to handle when the user tries to divide by 0
 
-[ ] How to implement keybinding
+[x] How to implement keybinding
 
 [ ] Handle the significant figures  when dealing with float values
 
