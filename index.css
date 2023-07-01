@@ -121,6 +121,20 @@ td {
     background-color: blue;
     color: whitesmoke;
     font-size: 1.5rem;
+
+    box-shadow: 2px 2px 2px 0px red;
+    transition: all 0.3s;
+    cursor: pointer;
+}
+
+.btn:hover {
+    box-shadow: 0px 15px 25px -5px dodgerblue;
+    transform: scale(1.03);
+}
+
+.btn:active {
+    box-shadow: 0px 4px 8px dodgerblue;
+    transform: scale(0.98);
 }
 
 @media (max-width: 768px) {
