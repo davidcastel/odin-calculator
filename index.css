@@ -1,3 +1,10 @@
+:root {
+    --dark-blue: #164B60;
+    --navy-blue: #1B6B93;
+    --light-blue: #4FC0D0;
+    --light-green: #A2FF86;
+}
+
 /* Boiler Plate */
 * {
     box-sizing: border-box;
@@ -19,6 +26,7 @@ img {
 html {
     -webkit-text-size-adjust: none; /* for iOS Safari */
     text-size-adjust: none; /* for other mobile browsers */
+    background-color: var(--dark-blue);
 }
 
 @media (prefers-reduced-motion: no-preference) {
@@ -49,6 +57,7 @@ html {
     height: max-content;
     padding-top: 0.5rem;
     padding-bottom: 0.5rem;
+    background-color: var(--navy-blue);
 
     border-color: black;
     border-radius: 25px;
@@ -70,7 +79,7 @@ html {
 }
 
 #equation {
-    color: rgb(104, 104, 104);
+    color: var(--light-blue);
     font-size: 2vw;
     line-height: 2.5vw;
 
@@ -83,7 +92,7 @@ html {
     height: max-content;
     overflow-wrap: anywhere;
     
-    color: black;
+    color: var(--light-green);
     font-size: 4vw;
     line-height: 4.5vw;
 }
@@ -118,23 +127,31 @@ td {
     display: block;
     border-radius: 8px;
 
-    background-color: blue;
+    background-color: var(--navy-blue);
     color: whitesmoke;
     font-size: 1.5rem;
+    font-weight: 600;
 
-    box-shadow: 2px 2px 2px 0px red;
+    box-shadow: 2px 2px 2px 0px var(--light-blue);
     transition: all 0.3s;
     cursor: pointer;
 }
 
 .btn:hover {
-    box-shadow: 0px 15px 25px -5px dodgerblue;
+    box-shadow: 3px 3px 2px var(--light-green);
+    font-size: 1.8rem;
     transform: scale(1.03);
 }
 
 .btn:active {
-    box-shadow: 0px 4px 8px dodgerblue;
+    box-shadow: 1px 2px 2px var(--light-green);
+    font-size: 1.3rem;
     transform: scale(0.98);
+}
+
+.btn::after {
+    font-size: 1.5rem;
+    box-shadow: 2px 2px 2px 0px var(--light-blue);
 }
 
 @media (max-width: 768px) {

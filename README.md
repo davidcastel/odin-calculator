@@ -12,4 +12,4 @@
 ## Extra things that could be implemented
 [ ] Implement a backspace value
 
-[ ] Make CSS a little better and easier on the eyes
+[x] Make CSS a little better and easier on the eyes
