@@ -45,7 +45,8 @@ html {
 
 /* Screen */
 .screen {
-    height: 100px;
+    min-height: 6.25rem;
+    height: max-content;
     padding-top: 0.5rem;
     padding-bottom: 0.5rem;
 
@@ -69,17 +70,22 @@ html {
 }
 
 #equation {
-    height: 30%;
-
     color: rgb(104, 104, 104);
-    font-size: 2rem;
+    font-size: 2vw;
+    line-height: 2.5vw;
+
+    min-height: 30%;
+    height: fit-content;
 }
 
 #individualNumber {
-    height: 70%;
+    min-height: 70%;
+    height: max-content;
+    overflow-wrap: anywhere;
     
     color: black;
-    font-size: 4rem;
+    font-size: 4vw;
+    line-height: 4.5vw;
 }
 
 /* Grid Layout */

@@ -5,7 +5,7 @@
 
 [x] How to implement keybinding
 
-[ ] Handle the significant figures  when dealing with float values
+[x] Handle the significant figures  when dealing with float values
 
 [x] Refactor code to have more efficient way of completeing tasks
 
